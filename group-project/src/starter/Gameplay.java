@@ -378,7 +378,12 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 				gameTime = 100;
 				enemyHitCount=0;
 				winScreenTimer.start();
-				userWin();
+				try {
+					userWin();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 			if(gameTime == 0 || singlePlayerTankHealth == 0) { //Track user loss
@@ -388,7 +393,12 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 				gameTime = 100;
 				enemyHitCount = 0;
 				loseScreenTimer.start();
-				userLose();
+				try {
+					userLose();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 		if(enemyFireTimer.isRunning()) {
@@ -727,7 +737,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 		
 	}
 	
-	public void userWin() { //displays the screen when the user wins
+	public void userWin() throws IOException { //displays the screen when the user wins
 		System.out.println("User Win Entered");
 		removeAll(); //Removes everything from screen.
 		enemyRectangles.clear();
@@ -739,11 +749,12 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 		add(winScoreboardButton);
 		add(winNextLevelButton);
 		GLabel scoreLabel = new GLabel(" " + singlePlayerScores.get(gameNumber),700,350);
+		writeLeaderboard(singlePlayerScores.get(gameNumber));
 		scoreLabel.setFont("AgencyFB-BOLD-50");
 		add(scoreLabel);
 	}
 	
-	public void userLose() { //displays the screen when the user loses
+	public void userLose() throws IOException { //displays the screen when the user loses
 		System.out.println("User Lose Entered");
 		removeAll(); //Removes everything from screen.
 		enemyRectangles.clear();
@@ -754,6 +765,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 		add(loseReturnMainMenuButton);
 		add(loseRetryButton);
 		GLabel scoreLabel = new GLabel(" " + singlePlayerScores.get(gameNumber),700,350);
+		writeLeaderboard(singlePlayerScores.get(gameNumber));
 		scoreLabel.setFont("AgencyFB-BOLD-50");
 		add(scoreLabel);
 	}
@@ -1022,7 +1034,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 			add(temp);
 		}
 	}
-	public void writeLeaderboard(String user, int score) throws IOException {
+	public void writeLeaderboard(int score) throws IOException {
 		try {
 			out = new FileOutputStream("leaderboard.txt");
 			out.write(score);
