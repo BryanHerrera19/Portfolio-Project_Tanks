@@ -2,6 +2,9 @@ package starter;
 
 import acm.graphics.*;
 import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import acm.program.*;
 import acm.util.*;
 import java.awt.*;
@@ -144,9 +147,6 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 	private int userLevelFourRepeat = 0;
 	private int userLevel = 1;
 	private GLabel levelLabel = new GLabel("Level #", 1400, 30);
-	
-	//File IO
-	FileOutputStream out = null;
 	
 	
 	public void init() {
@@ -378,13 +378,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 				gameTime = 100;
 				enemyHitCount=0;
 				winScreenTimer.start();
-				try {
-					userWin();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
+				userWin();
 			}
 			if(gameTime == 0 || singlePlayerTankHealth == 0) { //Track user loss
 				singlePlayerTimer.stop();
@@ -393,12 +387,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 				gameTime = 100;
 				enemyHitCount = 0;
 				loseScreenTimer.start();
-				try {
-					userLose();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				userLose();
 			}
 		}
 		if(enemyFireTimer.isRunning()) {
@@ -737,7 +726,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 		
 	}
 	
-	public void userWin() throws IOException { //displays the screen when the user wins
+	public void userWin() { //displays the screen when the user wins
 		System.out.println("User Win Entered");
 		removeAll(); //Removes everything from screen.
 		enemyRectangles.clear();
@@ -754,7 +743,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 		add(scoreLabel);
 	}
 	
-	public void userLose() throws IOException { //displays the screen when the user loses
+	public void userLose() { //displays the screen when the user loses
 		System.out.println("User Lose Entered");
 		removeAll(); //Removes everything from screen.
 		enemyRectangles.clear();
@@ -1034,14 +1023,22 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 			add(temp);
 		}
 	}
-	public void writeLeaderboard(int score) throws IOException {
+	public void writeLeaderboard(int score) {
+		//File IO
 		try {
-			out = new FileOutputStream("leaderboard.txt");
-			out.write(score);
-		}finally {
-			if(out != null) {
-				out.close();
+			File myObj = new File("leaderboard.txt");
+			if(myObj.createNewFile()) {
+				System.out.println("File created");
+			}else {
+				System.out.println("File already exists.");
 			}
+			FileWriter myWriter = new FileWriter("leaderboard.txt");
+			myWriter.write("Hello I am testing");
+			System.out.println("Wrote to file");
+			myWriter.close();
+		}catch(IOException e) {
+			System.out.println("Error Occured!");
+			e.printStackTrace();
 		}
 	}
 }
