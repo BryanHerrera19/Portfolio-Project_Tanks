@@ -1018,4 +1018,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 			add(temp);
 		}
 	}
+	public void writeLeaderboard(String user, int score) {
+		
+	}
 }
