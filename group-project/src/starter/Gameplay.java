@@ -1,6 +1,7 @@
 package starter;
 
 import acm.graphics.*;
+import java.io.*;
 import acm.program.*;
 import acm.util.*;
 import java.awt.*;
@@ -143,6 +144,9 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 	private int userLevelFourRepeat = 0;
 	private int userLevel = 1;
 	private GLabel levelLabel = new GLabel("Level #", 1400, 30);
+	
+	//File IO
+	FileOutputStream out = null;
 	
 	
 	public void init() {
@@ -1018,7 +1022,14 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 			add(temp);
 		}
 	}
-	public void writeLeaderboard(String user, int score) {
-		
+	public void writeLeaderboard(String user, int score) throws IOException {
+		try {
+			out = new FileOutputStream("leaderboard.txt");
+			out.write(score);
+		}finally {
+			if(out != null) {
+				out.close();
+			}
+		}
 	}
 }
