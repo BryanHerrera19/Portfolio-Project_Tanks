@@ -348,23 +348,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 			}
 	
 		}		
-		//pause screen button recognition 
-//		if(pauseTimer.isRunning()) {
-//			if(pauseReturnMainMenuPressed) {
-//				singlePlayerTimer.stop();
-//				gameTimer.stop();
-//				pauseTimer.stop();
-//				pauseReturnMainMenuPressed = false;
-//				displayMenu();
-//			}
-//			if(resumeButtonPressed) {
-//				pauseTimer.stop();
-//				singlePlayerTimer.stop();
-//				gameTimer.stop();
-//				//Temporary here, later we must figure out how to resume a game properly.
-//				singlePlayerMode();
-//			}
-//		}
+
 		if(singlePlayerTimer.isRunning()) {
 			enemyMovement();
 			singlePlayerMoveProjectile();
@@ -738,7 +722,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 		add(winScoreboardButton);
 		add(winNextLevelButton);
 		GLabel scoreLabel = new GLabel(" " + singlePlayerScores.get(gameNumber),700,350);
-		writeLeaderboard(singlePlayerScores.get(gameNumber));
+		writeLeaderboard(Integer.toString(singlePlayerScores.get(gameNumber))); //Adds score to leaderboard file
 		scoreLabel.setFont("AgencyFB-BOLD-50");
 		add(scoreLabel);
 	}
@@ -754,7 +738,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 		add(loseReturnMainMenuButton);
 		add(loseRetryButton);
 		GLabel scoreLabel = new GLabel(" " + singlePlayerScores.get(gameNumber),700,350);
-		writeLeaderboard(singlePlayerScores.get(gameNumber));
+		writeLeaderboard(Integer.toString(singlePlayerScores.get(gameNumber)));//Adds score to leaderboard file
 		scoreLabel.setFont("AgencyFB-BOLD-50");
 		add(scoreLabel);
 	}
@@ -1023,7 +1007,7 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 			add(temp);
 		}
 	}
-	public void writeLeaderboard(int score) {
+	public void writeLeaderboard(String score) {//Method to write scores to leaderboard.txt
 		//File IO
 		try {
 			File myFile = new File("../group-project/src/starter/leaderboard.txt");
@@ -1032,11 +1016,11 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 			}else {
 				System.out.println("File Already Exists");
 			}
-			FileWriter myWriter = new FileWriter("../group-project/src/starter/leaderboard.txt");
-			myWriter.write("Hello I am testing");
-			myWriter.flush();
-			myWriter.close();
-			System.out.println("Wrote to file");
+			FileWriter myWriter = new FileWriter("../group-project/src/starter/leaderboard.txt", true);
+			BufferedWriter bw = new BufferedWriter(myWriter);
+			bw.append(score);
+			bw.newLine();
+			bw.close();
 		}catch(IOException e) {
 			System.out.println("Error Occured!");
 			e.printStackTrace();
