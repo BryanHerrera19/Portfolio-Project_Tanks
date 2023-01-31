@@ -1026,16 +1026,17 @@ public class Gameplay extends GraphicsProgram implements ActionListener,KeyListe
 	public void writeLeaderboard(int score) {
 		//File IO
 		try {
-			File myObj = new File("leaderboard.txt");
-			if(myObj.createNewFile()) {
-				System.out.println("File created");
+			File myFile = new File("../group-project/src/starter/leaderboard.txt");
+			if(myFile.createNewFile()) {
+				System.out.println("File Created");
 			}else {
-				System.out.println("File already exists.");
+				System.out.println("File Already Exists");
 			}
-			FileWriter myWriter = new FileWriter("leaderboard.txt");
+			FileWriter myWriter = new FileWriter("../group-project/src/starter/leaderboard.txt");
 			myWriter.write("Hello I am testing");
-			System.out.println("Wrote to file");
+			myWriter.flush();
 			myWriter.close();
+			System.out.println("Wrote to file");
 		}catch(IOException e) {
 			System.out.println("Error Occured!");
 			e.printStackTrace();
