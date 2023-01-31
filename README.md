@@ -18,3 +18,9 @@ Method named readLeaderboard
   open text file named leaderboard
   iterate through file getting the top 5 scores
   return an arraylist of the scores
+
+Finished Implementation
+1. Load Game
+2. Enter the Scoreboard menu
+3. See scores from previous games
+To verify that the readLeaderboard method is reading scores from the file you can also change the scores in leaderboard.txt or play a game to add a score to leaderboard.txt
