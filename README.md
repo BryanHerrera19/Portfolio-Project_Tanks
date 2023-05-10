@@ -1,26 +1,16 @@
-# COMP_055-project-tanks
-groupproject-team-1-spacey created by GitHub Classroom
+# Portfolio-Project Tanks
+Bryan Herrera's Projects
 
-Part 1
-The feature that I will be implementing is a leaderboard. This will be done using file IO by writing scores and appending them to a file.
-It will then be able to read that file and display it in a scoreboard.
+Coded By:
+Bryan Herrera, Patrick Nisperos, Adil Hajiyev, Bill Nguyen
 
-Part 2
-Method named writeLeaderboard
-  Create text file named leaderboard
-  check if file already exists
-  create a filewrite
-  create a new burffered writer
-  append score
-  close file
-  exception handling
-Method named readLeaderboard
-  open text file named leaderboard
-  iterate through file getting the top 5 scores
-  return an arraylist of the scores
+A 2D Java game similar to Space Invaders in which the user controls a tank and fires at enemies. Project Tanks has 4 levels with increasing difficulty and gives the user
+a score once they lose or finish all the levels.
 
-Finished Implementation
-1. Load Game
-2. Enter the Scoreboard menu
-3. See scores from previous games
-To verify that the readLeaderboard method is reading scores from the file you can also change the scores in leaderboard.txt or play a game to add a score to leaderboard.txt
+Run using Java JRE 1.8.0_202
+
+Main Menu of Java Applet
+![mainmenu](https://github.com/BryanHerrera19/Portfolio/blob/9db5d70ec9dc6b691de907812e628e62e784c030/project-tanks/Project%20Tanks%20Applet%20Snippets/main-menu.PNG?raw=true)
+
+One Level of the Game
+![level3](https://github.com/BryanHerrera19/Portfolio-Project_Tanks/blob/6b82d38407998c9b2908acb00f230108e106a4ae/Project%20Tanks%20Applet%20Snippets/Level%203%20Deletion.PNG?raw=true)
